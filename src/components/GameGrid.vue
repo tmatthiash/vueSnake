@@ -1,9 +1,14 @@
 <template>
     <div class="game-grid" v-if="gameMap !== null">
         <div class="game-grid-column" :key="x" v-for="(x, indexX) in gameMap">
-             <div class="game-grid-cell" :key="y" v-for="(y, indexY) in x">{{gameMap[indexX][indexY]}}
+             <div 
+                class="game-grid-cell" 
+                :class="{ 'is-wall': gameMap[indexX][indexY] === 'W' }" 
+                :key="y" 
+                v-for="(y, indexY) in x">
                  <div class="game-grid-snake-head" v-if="indexX === xLocation && indexY === yLocation" />
                  <div class="game-grid-snake-body" v-if="locationIsSnakeBody(indexX, indexY)" />
+                 <div class="game-grid-snake-food" v-if="indexX === snakeFood.x && indexY === snakeFood.y" />
              </div>
         </div>
     </div>
@@ -12,15 +17,15 @@
 <script>
 export default {
     name: 'GameGrid',
-    props: ["gameMap", "xLocation", "yLocation", "snakeBody"],
+    props: ["gameMap", "xLocation", "yLocation", "snakeBody", "snakeFood"],  
     methods: {
-    locationIsSnakeBody: function(indexX, indexY) {
-      const foundMatchingLocation = this.snakeBody.filter((snakeSection) => {
-          return snakeSection.x === indexX && snakeSection.y === indexY;
-      })
-      return foundMatchingLocation.length > 0;
+        locationIsSnakeBody: function(indexX, indexY) {
+            const foundMatchingLocation = this.snakeBody.filter((snakeSection) => {
+                return snakeSection.x === indexX && snakeSection.y === indexY;
+            })
+            return foundMatchingLocation.length > 0;
+        },
     },
-  },
 }
 </script>
 
@@ -36,22 +41,34 @@ export default {
 }
 
 .game-grid-cell {
-    height: 20px;
-    width: 20px;
-    border: 1px solid lightgray;
+    height: 10px;
+    width: 10px;
+    /* border: 1px solid lightgray; */
 }
 
 .game-grid-snake-head {
     position: absolute;
-    height: 20px;
-    width: 20px;
+    height: 10px;
+    width: 10px;
     background-color: red;
 }
 
 .game-grid-snake-body {
     position: absolute;
-    height: 20px;
-    width: 20px;
+    height: 10px;
+    width: 10px;
     background-color: purple;
+}
+
+.game-grid-snake-food {
+    position: absolute;
+    height: 10px;
+    width: 10px;
+    background-color: green;
+    border-radius: 40%;
+}
+
+.is-wall {
+    background-color: black;
 }
 </style>
