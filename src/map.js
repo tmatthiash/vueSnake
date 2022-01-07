@@ -1,4 +1,4 @@
-export const MAX_WIDTH = 70;
+export const MAX_WIDTH = 60;
 export const MAX_HEIGHT = 40;
 
 export const map = new Array(MAX_WIDTH)

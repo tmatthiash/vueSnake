@@ -1,22 +1,27 @@
 <template>
     <div>Score: {{snakeLength-5}}</div>
-    <game-grid 
-        :gameMap="gameMap" 
-        :xLocation="xLocation" 
-        :yLocation="yLocation" 
-        :snakeBody="snakeBody"
-        :snakeFood="snakeFood"
-        />
+    <div class="game-wrapper">
+        <game-grid 
+            :gameMap="gameMap" 
+            :xLocation="xLocation" 
+            :yLocation="yLocation" 
+            :snakeBody="snakeBody"
+            :snakeFood="snakeFood"
+            />
+        <Legend />
+    </div>
 </template>
 
 <script>
 import GameGrid from './GameGrid.vue'
 import { map, MAX_HEIGHT, MAX_WIDTH } from '../map'
+import Legend from './Legend.vue';
 
 export default {
     name: 'HomePage',
     components: {
-        GameGrid
+        GameGrid,
+        Legend
     },
     data() {
         return {      
@@ -27,7 +32,9 @@ export default {
             keyPress: null,
             lastKeyPress: null,
             snakeLength: 5,
-            snakeFood: {}
+            snakeFood: {},
+            gameSpeed: 100,
+            intervalId: null
         };
     },
     methods: {
@@ -47,8 +54,35 @@ export default {
         hasHitFood() {
             return this.xLocation === this.snakeFood.x && this.yLocation === this.snakeFood.y;
         },
+        handleEatFood() {            
+            this.gameSpeed = 100;
+            switch(this.snakeFood.type) {
+                case 0:
+                    this.snakeLength += 3;
+                    break;
+                case 1:
+                    this.snakeLength += 10;
+                    break;                
+                case 2:
+                    this.gameSpeed = 20;
+                    break;
+            }
+            this.resetMoveSpeed();
+            this.createNewSnakeFood(); 
+        },
         getRandomInt(maxNumber) {
             return Math.floor(Math.random() * maxNumber);
+        },
+        resetMoveSpeed() {
+            clearInterval(this.intervalId);
+            this.setMovingInterval();
+        },
+        createNewSnakeFood() {
+            this.snakeFood = { 
+                x: this.getRandomInt(MAX_WIDTH-2) + 1, 
+                y: this.getRandomInt(MAX_HEIGHT-2) + 1, 
+                type: this.getRandomInt(3) 
+            }
         },
         moveSnake() {
             switch(this.keyPress) {
@@ -89,14 +123,9 @@ export default {
                     }
                     break;
             }
-        }
-    },
-    mounted() {
-        this.gameMap = map;
-
-        this.snakeFood = { x: this.getRandomInt(MAX_WIDTH-2) + 1, y: this.getRandomInt(MAX_HEIGHT-2) + 1, type: this.getRandomInt(2)}
-
-        const intervalID = setInterval(() => {
+        },
+        setMovingInterval() {
+            this.intervalId = setInterval(() => {
             this.snakeBody.push({x: this.xLocation, y: this.yLocation});
             if(this.snakeBody.length > this.snakeLength) {
                 this.snakeBody.shift();
@@ -107,18 +136,23 @@ export default {
             if(this.keyPress) {
 
                 if(this.hasColided()) {
-                    console.log(this.xLocation, this.yLocation)
                     console.log("COLLISION")
-                    clearInterval(intervalID);
+                    clearInterval(this.intervalId);
                 }
                 if(this.hasHitFood()) {
-                    this.snakeLength += 3;
-                    this.snakeFood = { x: this.getRandomInt(MAX_WIDTH-2) + 1, y: this.getRandomInt(MAX_HEIGHT-2) + 1 }
+                    this.handleEatFood();
                 }
             }
             
-        }, 100)
+        }, this.gameSpeed)
+        }
+    },
+    mounted() {
+        this.gameMap = map;
 
+        this.createNewSnakeFood();
+
+        this.setMovingInterval();
 
         window.addEventListener("keypress", e => {
             this.keyPress = e.key;
@@ -128,4 +162,8 @@ export default {
 </script>
 
 <style scoped>
+.game-wrapper {
+    display: flex;
+    justify-content: space-around;
+}
 </style>

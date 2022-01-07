@@ -8,7 +8,10 @@
                 v-for="(y, indexY) in x">
                  <div class="game-grid-snake-head" v-if="indexX === xLocation && indexY === yLocation" />
                  <div class="game-grid-snake-body" v-if="locationIsSnakeBody(indexX, indexY)" />
-                 <div class="game-grid-snake-food" v-if="indexX === snakeFood.x && indexY === snakeFood.y" />
+                 <div 
+                    class="game-grid-snake-food" 
+                    :class="'food-type-' + snakeFood.type"
+                    v-if="indexX === snakeFood.x && indexY === snakeFood.y" />
              </div>
         </div>
     </div>
@@ -17,7 +20,7 @@
 <script>
 export default {
     name: 'GameGrid',
-    props: ["gameMap", "xLocation", "yLocation", "snakeBody", "snakeFood"],  
+    props: ["gameMap", "xLocation", "yLocation", "snakeBody", "snakeFood"],
     methods: {
         locationIsSnakeBody: function(indexX, indexY) {
             const foundMatchingLocation = this.snakeBody.filter((snakeSection) => {
@@ -25,7 +28,7 @@ export default {
             })
             return foundMatchingLocation.length > 0;
         },
-    },
+    }, 
 }
 </script>
 
@@ -66,6 +69,18 @@ export default {
     width: 10px;
     background-color: green;
     border-radius: 40%;
+}
+
+.food-type-0 {
+    background-color: green; 
+}
+
+.food-type-1 {
+    background-color: blue; 
+}
+
+.food-type-2 {
+    background-color: red; 
 }
 
 .is-wall {
