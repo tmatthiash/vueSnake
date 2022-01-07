@@ -34,7 +34,8 @@ export default {
             snakeLength: 5,
             snakeFood: {},
             gameSpeed: 100,
-            intervalId: null
+            intervalId: null,
+            isFoodTeleporting: false,
         };
     },
     methods: {
@@ -56,6 +57,7 @@ export default {
         },
         handleEatFood() {            
             this.gameSpeed = 100;
+            this.isFoodTeleporting = false;
             switch(this.snakeFood.type) {
                 case 0:
                     this.snakeLength += 3;
@@ -65,6 +67,10 @@ export default {
                     break;                
                 case 2:
                     this.gameSpeed = 50;
+                    this.snakeLength += 3;                    
+                    break;                
+                case 3:
+                    this.snakeLength += 3;
                     break;
             }
             this.resetMoveSpeed();
@@ -78,10 +84,14 @@ export default {
             this.setMovingInterval();
         },
         createNewSnakeFood() {
+            const foodType = this.getRandomInt(4) 
             this.snakeFood = { 
                 x: this.getRandomInt(MAX_WIDTH-2) + 1, 
                 y: this.getRandomInt(MAX_HEIGHT-2) + 1, 
-                type: this.getRandomInt(3) 
+                type: foodType 
+            }
+            if(foodType === 3) {
+                this.isFoodTeleporting = true;
             }
         },
         moveSnake() {
@@ -132,6 +142,12 @@ export default {
             }
         
             this.moveSnake();
+
+            console.log(this.isFoodTeleporting);
+
+            if(this.isFoodTeleporting) {
+                this.checkToTeleport()
+            }
         
             if(this.keyPress) {
 
@@ -145,6 +161,15 @@ export default {
             }
             
         }, this.gameSpeed)
+        },
+        checkToTeleport() {
+            if(this.getRandomInt(30) === 0) {
+                this.snakeFood = { 
+                    x: this.getRandomInt(MAX_WIDTH-2) + 1, 
+                    y: this.getRandomInt(MAX_HEIGHT-2) + 1, 
+                    type: 3 
+                }
+            }
         }
     },
     mounted() {

@@ -44,6 +44,10 @@ export default {
     background-color: red; 
 }
 
+.food-type-3 {
+    background-color: magenta; 
+}
+
 
 .game-grid-snake-head {
     height: 10px;

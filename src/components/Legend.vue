@@ -13,6 +13,10 @@
             <div class="entry-food food-type-2" />
             <h4 class="entry-text">Fast</h4>
         </div>
+            <div class="legend-entry">
+            <div class="entry-food food-type-3" />
+            <h4 class="entry-text">Blink</h4>
+        </div>
     </div>
 </template>
 
@@ -43,6 +47,10 @@ export default {
 
 .food-type-2 {
     background-color: red;
+}
+
+.food-type-3 {
+    background-color: magenta ;
 }
 
 .entry-text {
