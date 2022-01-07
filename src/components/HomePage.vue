@@ -64,7 +64,7 @@ export default {
                     this.snakeLength += 10;
                     break;                
                 case 2:
-                    this.gameSpeed = 20;
+                    this.gameSpeed = 50;
                     break;
             }
             this.resetMoveSpeed();
