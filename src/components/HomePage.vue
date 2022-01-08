@@ -61,6 +61,7 @@ export default {
             this.gameSpeed = 90;
             this.isFoodTeleporting = false;
             this.switchGhostModeTo(false);
+            this.switchInvisibleModeTo(false);
             switch(this.snakeFood.type) {
                 case 0:
                     this.snakeLength += 3;
@@ -78,6 +79,10 @@ export default {
                 case 4:
                     this.snakeLength += 3;
                     this.switchGhostModeTo(true);
+                    break;                
+                case 5:
+                    this.snakeLength += 3;
+                    this.switchInvisibleModeTo(true);
                     break;
             }
             this.resetMoveSpeed();
@@ -98,11 +103,12 @@ export default {
             previousFood?.classList.remove("food-type-2");
             previousFood?.classList.remove("food-type-3");
             previousFood?.classList.remove("food-type-4");
+            previousFood?.classList.remove("food-type-5");
         },
         createNewSnakeFood() {
 
             this.clearAllOldFoods();
-            const foodType = this.getRandomInt(5);
+            const foodType = this.getRandomInt(6);
             const newFoodX = this.getRandomInt(MAX_WIDTH-2) + 1;
             const newFoodY = this.getRandomInt(MAX_HEIGHT-2) + 1;
             this.snakeFood = { 
@@ -185,6 +191,7 @@ export default {
 
                 if(this.hasColided()) {
                     console.log("COLLISION")
+                    this.switchInvisibleModeTo(false);
                     clearInterval(this.intervalId);
                 }
                 if(this.hasHitFood()) {
@@ -218,6 +225,19 @@ export default {
                 const ghosts = document.getElementsByClassName("game-grid-cell");
                 for(let i = 0; i < ghosts.length; i++) {
                     ghosts[i].classList.remove("ghost");
+                }
+            }
+        },
+        switchInvisibleModeTo(on) {
+            if(on) {
+                const ghosts = document.getElementsByClassName("game-grid-cell");
+                for(let i = 0; i < ghosts.length; i++) {
+                    ghosts[i].classList.add("invisible");
+                }
+            } else {
+                const ghosts = document.getElementsByClassName("game-grid-cell");
+                for(let i = 0; i < ghosts.length; i++) {
+                    ghosts[i].classList.remove("invisible");
                 }
             }
         }

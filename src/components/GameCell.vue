@@ -17,6 +17,10 @@ export default {
     opacity: 0.6;
 }
 
+.invisible {
+    opacity: 0;
+}
+
 .game-grid-cell {
     height: 10px;
     width: 10px;
@@ -60,10 +64,15 @@ export default {
     background-color: darkgrey; 
 }
 
+.food-type-5 {
+    background-color: yellow; 
+}
+
 
 .game-grid-snake-head {
     height: 10px;
     width: 10px;
     background-color: rgb(45, 0, 65);
+    opacity: 1;
 }
 </style>

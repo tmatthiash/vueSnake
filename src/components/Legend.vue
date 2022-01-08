@@ -21,6 +21,10 @@
             <div class="entry-food food-type-4" />
             <h4 class="entry-text">Ghost Mode</h4>
         </div>
+        <div class="legend-entry">
+            <div class="entry-food food-type-5" />
+            <h4 class="entry-text">Invisible Body</h4>
+        </div>
     </div>
 </template>
 
@@ -59,6 +63,10 @@ export default {
 
 .food-type-4 {
     background-color: darkgrey ;
+}
+
+.food-type-5 {
+    background-color: yellow ;
 }
 
 .entry-text {
