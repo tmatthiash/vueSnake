@@ -13,7 +13,7 @@
         </div> -->
         <div v-if="gameMap !== undefined">
             <game-cell 
-            :key="y"
+            :key="indexX + indexY"
             :cellClass="buildClassNames(indexX, indexY)"
             v-for="(y, indexY) in x"/>
         </div>
