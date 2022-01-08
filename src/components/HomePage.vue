@@ -33,7 +33,7 @@ export default {
             lastKeyPress: null,
             snakeLength: 5,
             snakeFood: {},
-            gameSpeed: 100,
+            gameSpeed: 90,
             intervalId: null,
             isFoodTeleporting: false,
         };
@@ -56,7 +56,7 @@ export default {
             return this.xLocation === this.snakeFood.x && this.yLocation === this.snakeFood.y;
         },
         handleEatFood() {            
-            this.gameSpeed = 100;
+            this.gameSpeed = 90;
             this.isFoodTeleporting = false;
             switch(this.snakeFood.type) {
                 case 0:
@@ -83,18 +83,41 @@ export default {
             clearInterval(this.intervalId);
             this.setMovingInterval();
         },
+        clearAllOldFoods() {
+            const previousFood = document.getElementsByClassName("game-grid-food")[0];
+            previousFood?.classList.remove("game-grid-food");
+            previousFood?.classList.remove("food-type-0");
+            previousFood?.classList.remove("food-type-1");
+            previousFood?.classList.remove("food-type-2");
+            previousFood?.classList.remove("food-type-3");
+            previousFood?.classList.remove("food-type-4");
+        },
         createNewSnakeFood() {
-            const foodType = this.getRandomInt(4) 
+
+            this.clearAllOldFoods();
+            const foodType = this.getRandomInt(4);
+            const newFoodX = this.getRandomInt(MAX_WIDTH-2) + 1;
+            const newFoodY = this.getRandomInt(MAX_HEIGHT-2) + 1;
             this.snakeFood = { 
-                x: this.getRandomInt(MAX_WIDTH-2) + 1, 
-                y: this.getRandomInt(MAX_HEIGHT-2) + 1, 
+                x: newFoodX,
+                y: newFoodY, 
                 type: foodType 
             }
+
+            const newFood = document.getElementsByClassName(`cell-${newFoodX}-${newFoodY}`)[0];
+            newFood.classList.add("game-grid-food");
+            newFood.classList.add(`food-type-${foodType}`);
+
+
             if(foodType === 3) {
                 this.isFoodTeleporting = true;
             }
         },
         moveSnake() {
+            const previousSnakeHead = document.getElementsByClassName("game-grid-snake-head")[0];
+            previousSnakeHead?.classList.remove("game-grid-snake-head");
+            previousSnakeHead?.classList.add("game-grid-snake-body");
+
             switch(this.keyPress) {
                 case 'w':                    
                     if(this.lastKeyPress !== 's') {
@@ -133,17 +156,19 @@ export default {
                     }
                     break;
             }
+            const snakeHead = document.getElementsByClassName(`cell-${this.xLocation}-${this.yLocation}`)[0];
+            snakeHead.classList.add("game-grid-snake-head");
         },
         setMovingInterval() {
             this.intervalId = setInterval(() => {
             this.snakeBody.push({x: this.xLocation, y: this.yLocation});
             if(this.snakeBody.length > this.snakeLength) {
-                this.snakeBody.shift();
+                const removedSection = this.snakeBody.shift();
+                const nowOpen = document.getElementsByClassName(`cell-${removedSection.x}-${removedSection.y}`)[0];
+                nowOpen.classList.remove("game-grid-snake-body")
             }
         
             this.moveSnake();
-
-            console.log(this.isFoodTeleporting);
 
             if(this.isFoodTeleporting) {
                 this.checkToTeleport()
@@ -159,23 +184,30 @@ export default {
                     this.handleEatFood();
                 }
             }
-            
         }, this.gameSpeed)
         },
         checkToTeleport() {
             if(this.getRandomInt(30) === 0) {
+                this.clearAllOldFoods();
+                const newFoodX = this.getRandomInt(MAX_WIDTH-2) + 1;
+                const newFoodY = this.getRandomInt(MAX_HEIGHT-2) + 1;
                 this.snakeFood = { 
-                    x: this.getRandomInt(MAX_WIDTH-2) + 1, 
-                    y: this.getRandomInt(MAX_HEIGHT-2) + 1, 
+                    x: newFoodX, 
+                    y: newFoodY, 
                     type: 3 
                 }
+            const newFood = document.getElementsByClassName(`cell-${newFoodX}-${newFoodY}`)[0];
+            newFood.classList.add("game-grid-food");
+            newFood.classList.add('food-type-3');
             }
         }
     },
     mounted() {
         this.gameMap = map;
 
-        this.createNewSnakeFood();
+        setTimeout(() => {
+            this.createNewSnakeFood();
+        }, 200)
 
         this.setMovingInterval();
 

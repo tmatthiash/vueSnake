@@ -41,22 +41,23 @@ export default {
         },
         buildClassNames(indexX, indexY) {
             let className = "game-grid-cell";
+            className+=` cell-${indexX}-${indexY}`
             if(this.gameMap[indexX][indexY] === 'W'){
                 className += " is-wall"
             }
 
-            if(indexX === this.xLocation && indexY === this.yLocation) {
-                className += " game-grid-snake-head"
-            }
+            // if(indexX === this.xLocation && indexY === this.yLocation) {
+            //     className += " game-grid-snake-head"
+            // }
 
-            if(this.locationIsSnakeBody(indexX, indexY)) {
-                className += " game-grid-snake-body"
-            }
+            // if(this.locationIsSnakeBody(indexX, indexY)) {
+            //     className += " game-grid-snake-body"
+            // }
 
-            if(indexX === this.snakeFood.x && indexY === this.snakeFood.y) {
-                className += " game-grid-snake-food"
-                className += " food-type-" + this.snakeFood.type;
-            }
+            // if(indexX === this.snakeFood.x && indexY === this.snakeFood.y) {
+            //     className += " game-grid-snake-food"
+            //     className += " food-type-" + this.snakeFood.type;
+            // }
 
             return className
         }

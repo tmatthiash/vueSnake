@@ -5,7 +5,10 @@
 <script>
 export default {
     name: "GameCell",
-    props: ["cellClass"]
+    props: ["cellClass"],
+    updated() {
+        console.log("cell updating")
+    }
 }
 </script>
 
