@@ -1,5 +1,5 @@
 <template>
-    <div class="score-label">Score: {{snakeLength-5}}</div>
+    <div class="score-label">Score: {{gameScore}}</div>
     <div class="game-wrapper">
         <game-grid 
             :gameMap="gameMap" 
@@ -32,6 +32,7 @@ export default {
             keyPress: null,
             lastKeyPress: null,
             snakeLength: 5,
+            gameScore: 0,
             snakeFood: {},
             gameSpeed: 90,
             intervalId: null,
@@ -64,25 +65,38 @@ export default {
             this.switchInvisibleModeTo(false);
             switch(this.snakeFood.type) {
                 case 0:
+                    this.gameScore += 3;
                     this.snakeLength += 3;
                     break;
                 case 1:
+                    this.gameScore += 3;
                     this.snakeLength += 10;
                     break;                
                 case 2:
                     this.gameSpeed = 50;
+                    this.gameScore += 3;
                     this.snakeLength += 3;                    
                     break;                
                 case 3:
+                    this.gameScore += 3;
                     this.snakeLength += 3;
                     break;                
                 case 4:
                     this.snakeLength += 3;
+                    this.gameScore += 3;
                     this.switchGhostModeTo(true);
                     break;                
                 case 5:
                     this.snakeLength += 3;
+                    this.gameScore += 3;
                     this.switchInvisibleModeTo(true);
+                    break;                
+                case 6:
+                    this.snakeLength += 3;
+                    this.gameScore += 10;
+                    break;                
+                case 7:
+                    this.gameScore += 3;
                     break;
             }
             this.resetMoveSpeed();
@@ -104,11 +118,13 @@ export default {
             previousFood?.classList.remove("food-type-3");
             previousFood?.classList.remove("food-type-4");
             previousFood?.classList.remove("food-type-5");
+            previousFood?.classList.remove("food-type-6");
+            previousFood?.classList.remove("food-type-7");
         },
         createNewSnakeFood() {
 
             this.clearAllOldFoods();
-            const foodType = this.getRandomInt(6);
+            const foodType = this.getRandomInt(8);
             const newFoodX = this.getRandomInt(MAX_WIDTH-2) + 1;
             const newFoodY = this.getRandomInt(MAX_HEIGHT-2) + 1;
             this.snakeFood = { 

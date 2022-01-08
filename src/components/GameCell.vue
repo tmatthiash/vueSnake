@@ -42,7 +42,18 @@ export default {
     height: 10px;
     width: 10px;
     border-radius: 100% 100% 70% 70%;
+    background-color: brown;
 }
+
+/* .game-grid-snake-food::after {
+    height: 10px;
+    width: 10px;
+    z-index: 3000;
+    content: ' ';
+    display: block;
+    background-image: url("../assets/egg.svg");
+    background-size: 10px 10px;
+} */
 
 .food-type-0 {
     background-color: green; 
@@ -66,6 +77,14 @@ export default {
 
 .food-type-5 {
     background-color: yellow; 
+}
+
+.food-type-6 {
+    background-color: orange; 
+}
+
+.food-type-7 {
+    background-color: black; 
 }
 
 
