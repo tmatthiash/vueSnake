@@ -13,6 +13,10 @@ export default {
 </script>
 
 <style scoped>
+.ghost {
+    opacity: 0.6;
+}
+
 .game-grid-cell {
     height: 10px;
     width: 10px;
@@ -26,13 +30,14 @@ export default {
 
 .is-wall {
     background-color: black;
+    opacity: 1;
 }
 
 .game-grid-snake-food {
+    opacity: 1;
     height: 10px;
     width: 10px;
-    background-color: green;
-    border-radius: 40%;
+    border-radius: 100% 100% 70% 70%;
 }
 
 .food-type-0 {
@@ -51,10 +56,14 @@ export default {
     background-color: magenta; 
 }
 
+.food-type-4 {
+    background-color: darkgrey; 
+}
+
 
 .game-grid-snake-head {
     height: 10px;
     width: 10px;
-    background-color: red;
+    background-color: rgb(45, 0, 65);
 }
 </style>

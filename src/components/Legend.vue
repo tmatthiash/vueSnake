@@ -17,6 +17,10 @@
             <div class="entry-food food-type-3" />
             <h4 class="entry-text">Blink</h4>
         </div>
+        <div class="legend-entry">
+            <div class="entry-food food-type-4" />
+            <h4 class="entry-text">Ghost Mode</h4>
+        </div>
     </div>
 </template>
 
@@ -51,6 +55,10 @@ export default {
 
 .food-type-3 {
     background-color: magenta ;
+}
+
+.food-type-4 {
+    background-color: darkgrey ;
 }
 
 .entry-text {

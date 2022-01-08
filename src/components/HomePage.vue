@@ -1,5 +1,5 @@
 <template>
-    <div>Score: {{snakeLength-5}}</div>
+    <div class="score-label">Score: {{snakeLength-5}}</div>
     <div class="game-wrapper">
         <game-grid 
             :gameMap="gameMap" 
@@ -35,7 +35,7 @@ export default {
             snakeFood: {},
             gameSpeed: 90,
             intervalId: null,
-            isFoodTeleporting: false,
+            isFoodTeleporting: false
         };
     },
     methods: {
@@ -44,6 +44,8 @@ export default {
             if(this.xLocation === 0) return true;
             if(this.xLocation === MAX_WIDTH-1) return true;
             if(this.yLocation === MAX_HEIGHT-1) return true;
+
+            if(document.getElementsByClassName("ghost").length > 0) return false;
 
             const collisionsWithSelf = this.snakeBody.filter((snakeSection) => {
                 return snakeSection.x === this.xLocation && snakeSection.y === this.yLocation
@@ -58,6 +60,7 @@ export default {
         handleEatFood() {            
             this.gameSpeed = 90;
             this.isFoodTeleporting = false;
+            this.switchGhostModeTo(false);
             switch(this.snakeFood.type) {
                 case 0:
                     this.snakeLength += 3;
@@ -71,6 +74,10 @@ export default {
                     break;                
                 case 3:
                     this.snakeLength += 3;
+                    break;                
+                case 4:
+                    this.snakeLength += 3;
+                    this.switchGhostModeTo(true);
                     break;
             }
             this.resetMoveSpeed();
@@ -84,8 +91,8 @@ export default {
             this.setMovingInterval();
         },
         clearAllOldFoods() {
-            const previousFood = document.getElementsByClassName("game-grid-food")[0];
-            previousFood?.classList.remove("game-grid-food");
+            const previousFood = document.getElementsByClassName("game-grid-snake-food")[0];
+            previousFood?.classList.remove("game-grid-snake-food");
             previousFood?.classList.remove("food-type-0");
             previousFood?.classList.remove("food-type-1");
             previousFood?.classList.remove("food-type-2");
@@ -95,7 +102,7 @@ export default {
         createNewSnakeFood() {
 
             this.clearAllOldFoods();
-            const foodType = this.getRandomInt(4);
+            const foodType = this.getRandomInt(5);
             const newFoodX = this.getRandomInt(MAX_WIDTH-2) + 1;
             const newFoodY = this.getRandomInt(MAX_HEIGHT-2) + 1;
             this.snakeFood = { 
@@ -105,7 +112,7 @@ export default {
             }
 
             const newFood = document.getElementsByClassName(`cell-${newFoodX}-${newFoodY}`)[0];
-            newFood.classList.add("game-grid-food");
+            newFood.classList.add("game-grid-snake-food");
             newFood.classList.add(`food-type-${foodType}`);
 
 
@@ -187,7 +194,7 @@ export default {
         }, this.gameSpeed)
         },
         checkToTeleport() {
-            if(this.getRandomInt(30) === 0) {
+            if(this.getRandomInt(35) === 0) {
                 this.clearAllOldFoods();
                 const newFoodX = this.getRandomInt(MAX_WIDTH-2) + 1;
                 const newFoodY = this.getRandomInt(MAX_HEIGHT-2) + 1;
@@ -197,8 +204,21 @@ export default {
                     type: 3 
                 }
             const newFood = document.getElementsByClassName(`cell-${newFoodX}-${newFoodY}`)[0];
-            newFood.classList.add("game-grid-food");
+            newFood.classList.add("game-grid-snake-food");
             newFood.classList.add('food-type-3');
+            }
+        },
+        switchGhostModeTo(on) {
+            if(on) {
+                const ghosts = document.getElementsByClassName("game-grid-cell");
+                for(let i = 0; i < ghosts.length; i++) {
+                    ghosts[i].classList.add("ghost");
+                }
+            } else {
+                const ghosts = document.getElementsByClassName("game-grid-cell");
+                for(let i = 0; i < ghosts.length; i++) {
+                    ghosts[i].classList.remove("ghost");
+                }
             }
         }
     },
@@ -222,5 +242,11 @@ export default {
 .game-wrapper {
     display: flex;
     justify-content: space-around;
+}
+
+.score-label {
+    font-weight: bold;
+    font-size: 22px;
+    margin-bottom: 10px;
 }
 </style>
