@@ -33,8 +33,11 @@ export default {
 }
 
 .is-wall {
-    background-color: black;
+    background-color: #B73239;
+    border: 1px solid gray;
     opacity: 1;
+    height: 8px;
+    width: 8px;
 }
 
 .game-grid-snake-food {
@@ -50,13 +53,13 @@ export default {
 	animation: jello-vertical 1.5s infinite both;
 }
 
-/* .game-grid-snake-food::after {
+/* .is-wall::after {
     height: 10px;
     width: 10px;
     z-index: 3000;
     content: ' ';
     display: block;
-    background-image: url("../assets/egg.svg");
+    background-image: url("../assets/stone.svg");
     background-size: 10px 10px;
 } */
 

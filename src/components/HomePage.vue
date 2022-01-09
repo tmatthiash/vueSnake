@@ -17,6 +17,8 @@
 import GameGrid from './GameGrid.vue'
 import { map, MAX_HEIGHT, MAX_WIDTH } from '../map'
 import Legend from './Legend.vue';
+import { getFoodCoords } from "../utils/GetFoodCoords";
+import { randomInt } from '../utils/RandomInt';
 
 export default {
     name: 'HomePage',
@@ -117,9 +119,6 @@ export default {
             this.resetMoveSpeed();
             this.createNewSnakeFood(); 
         },
-        getRandomInt(maxNumber) {
-            return Math.floor(Math.random() * maxNumber);
-        },
         resetMoveSpeed() {
             clearInterval(this.intervalId);
             this.setMovingInterval();
@@ -141,9 +140,10 @@ export default {
         createNewSnakeFood() {
 
             this.clearAllOldFoods();
-            const foodType = this.getRandomInt(10);
-            const newFoodX = this.getRandomInt(MAX_WIDTH-2) + 1;
-            const newFoodY = this.getRandomInt(MAX_HEIGHT-2) + 1;
+            const foodType = randomInt(10);
+            const foodCoords = getFoodCoords(this.snakeBody);
+            const newFoodX = foodCoords.x;
+            const newFoodY = foodCoords.y;
             this.snakeFood = { 
                 x: newFoodX,
                 y: newFoodY, 
@@ -233,10 +233,11 @@ export default {
         }, this.gameSpeed)
         },
         checkToTeleport() {
-            if(this.getRandomInt(40) === 0) { 
+            if(randomInt(40) === 0) { 
                 this.clearAllOldFoods();
-                const newFoodX = this.getRandomInt(MAX_WIDTH-2) + 1;
-                const newFoodY = this.getRandomInt(MAX_HEIGHT-2) + 1;
+            const foodCoords = getFoodCoords(this.snakeBody);
+            const newFoodX = foodCoords.x;
+            const newFoodY = foodCoords.y;
                 this.snakeFood = { 
                     x: newFoodX, 
                     y: newFoodY, 
