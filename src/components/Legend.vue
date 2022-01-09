@@ -1,6 +1,6 @@
 <template>
     <div class="legend">
-        <h2>Legend</h2>
+        <h2>Egg Type Legend</h2>
         <div class="legend-entry">
             <div class="entry-food food-type-0" />
             <h4 class="entry-text">Normal</h4>

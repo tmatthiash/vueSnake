@@ -1,6 +1,6 @@
 <template>
     <div class="score-label">Score: {{gameScore}}</div>
-    <h4 class="explanation-label">(Most snake foods increase your score and body length by 3)</h4>
+    <h4 class="explanation-label">(Most eggs increase your score and body length by 3)</h4>
     <div class="game-wrapper">
         <game-grid 
             :gameMap="gameMap" 
@@ -212,7 +212,6 @@ export default {
             }
         
             if(this.keyPress) {
-
                 if(this.hasColided()) {
                     console.log("COLLISION")
                     this.switchInvisibleModeTo(false);

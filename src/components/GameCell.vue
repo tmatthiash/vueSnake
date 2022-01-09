@@ -46,8 +46,8 @@ export default {
     border: 0.5px solid black;
     margin: -1px;
 
-    -webkit-animation: jello-vertical 0.9s infinite both;
-	animation: jello-vertical 0.9s infinite both;
+    -webkit-animation: jello-vertical 1.5s infinite both;
+	animation: jello-vertical 1.5s infinite both;
 }
 
 /* .game-grid-snake-food::after {
