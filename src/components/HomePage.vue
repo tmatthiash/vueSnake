@@ -140,7 +140,8 @@ export default {
         createNewSnakeFood() {
 
             this.clearAllOldFoods();
-            const foodType = randomInt(10);
+            // const foodType = randomInt(10);
+            const foodType = 4;
             const foodCoords = getFoodCoords(this.snakeBody);
             const newFoodX = foodCoords.x;
             const newFoodY = foodCoords.y;
@@ -211,7 +212,12 @@ export default {
             if(this.snakeBody.length > this.snakeLength) {
                 const removedSection = this.snakeBody.shift();
                 const nowOpen = document.getElementsByClassName(`cell-${removedSection.x}-${removedSection.y}`)[0];
-                nowOpen.classList.remove("game-grid-snake-body")
+                const snakeSegmentsThatMightNeedToStayBecauseOfGhostMode = this.snakeBody.filter((segment => {
+                    return segment.x === removedSection.x && segment.y === removedSection.y;
+                }))
+                if(snakeSegmentsThatMightNeedToStayBecauseOfGhostMode.length === 0) {
+                    nowOpen.classList.remove("game-grid-snake-body")
+                }
             }
         
             this.moveSnake();

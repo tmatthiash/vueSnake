@@ -113,8 +113,6 @@ export default {
 
 
 .game-grid-snake-head {
-    height: 10px;
-    width: 10px;
     background-color: rgb(45, 0, 65);
     opacity: 1;
 }

@@ -37,8 +37,8 @@ export default {
 <style scoped>
 
 .earthquake {
-	-webkit-animation: shake-lr 6s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
-    animation: shake-lr 6s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
+	-webkit-animation: shake-lr 8s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
+    animation: shake-lr 8s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
 }
 .game-grid {
     display: flex;
