@@ -233,7 +233,7 @@ export default {
         }, this.gameSpeed)
         },
         checkToTeleport() {
-            if(this.getRandomInt(35) === 0) {
+            if(this.getRandomInt(40) === 0) { 
                 this.clearAllOldFoods();
                 const newFoodX = this.getRandomInt(MAX_WIDTH-2) + 1;
                 const newFoodY = this.getRandomInt(MAX_HEIGHT-2) + 1;

@@ -99,7 +99,13 @@ export default {
 }
 
 .food-type-9 {
-    background-color: brown;
+    background: repeating-linear-gradient(
+    45deg,
+    white 0px,
+    white 2px,
+    brown 2px,
+    brown 4px
+  );
 }
 
 
