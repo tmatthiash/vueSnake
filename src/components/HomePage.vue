@@ -1,5 +1,6 @@
 <template>
     <div class="score-label">Score: {{gameScore}}</div>
+    <h4 class="explanation-label">(Most snake foods increase your score and body length by 3)</h4>
     <div class="game-wrapper">
         <game-grid 
             :gameMap="gameMap" 
@@ -61,8 +62,10 @@ export default {
         handleEatFood() {            
             this.gameSpeed = 90;
             this.isFoodTeleporting = false;
-            this.switchGhostModeTo(false);
-            this.switchInvisibleModeTo(false);
+
+            if(document.getElementsByClassName("ghost").length > 0) this.switchGhostModeTo(false);
+            if(document.getElementsByClassName("invisible").length > 0) this.switchInvisibleModeTo(false);
+
             switch(this.snakeFood.type) {
                 case 0:
                     this.gameScore += 3;
@@ -268,7 +271,11 @@ export default {
         this.setMovingInterval();
 
         window.addEventListener("keypress", e => {
-            this.keyPress = e.key;
+            const allowedKeys = ['w', 'a', 's', 'd'];
+            if(allowedKeys.includes(e.key)) {
+                this.keyPress = e.key;
+            }
+
     });
     }
 }
@@ -284,5 +291,11 @@ export default {
     font-weight: bold;
     font-size: 22px;
     margin-bottom: 10px;
+}
+
+.explanation-label {
+    margin: 10px;
+    font-size: 13px;
+    font-weight: normal;
 }
 </style>
