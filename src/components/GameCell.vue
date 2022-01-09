@@ -43,6 +43,8 @@ export default {
     width: 10px;
     border-radius: 100% 100% 70% 70%;
     background-color: brown;
+    border: 0.5px solid black;
+    margin: -1px;
 
     -webkit-animation: jello-vertical 0.9s infinite both;
 	animation: jello-vertical 0.9s infinite both;
@@ -88,6 +90,12 @@ export default {
 
 .food-type-7 {
     background-color: black; 
+}
+
+.food-type-8 {
+    background-color: white; 
+    animation: blink-1 5s linear infinite both;
+    -webkit-animation: blink-1 5s linear infinite both;
 }
 
 
@@ -168,6 +176,29 @@ export default {
   100% {
     -webkit-transform: scale3d(1, 1, 1);
             transform: scale3d(1, 1, 1);
+  }
+}
+
+@-webkit-keyframes blink-1 {
+  0% {
+      opacity: 0;
+  }
+  60% {
+      opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes blink-1 {
+  0% {
+      opacity: 0;
+  }
+  60% {
+      opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 

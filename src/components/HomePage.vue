@@ -101,6 +101,10 @@ export default {
                 case 7:
                     this.gameScore += 3;
                     break;
+                case 8:
+                    this.gameScore += 3;
+                    this.snakeLength += 3;
+                    break;
             }
             this.resetMoveSpeed();
             this.createNewSnakeFood(); 
@@ -123,11 +127,12 @@ export default {
             previousFood?.classList.remove("food-type-5");
             previousFood?.classList.remove("food-type-6");
             previousFood?.classList.remove("food-type-7");
+            previousFood?.classList.remove("food-type-8");
         },
         createNewSnakeFood() {
 
             this.clearAllOldFoods();
-            const foodType = this.getRandomInt(8);
+            const foodType = this.getRandomInt(9);
             const newFoodX = this.getRandomInt(MAX_WIDTH-2) + 1;
             const newFoodY = this.getRandomInt(MAX_HEIGHT-2) + 1;
             this.snakeFood = { 

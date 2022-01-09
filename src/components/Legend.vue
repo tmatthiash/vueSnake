@@ -33,6 +33,10 @@
             <div class="entry-food food-type-7" />
             <h4 class="entry-text">No Growth</h4>
         </div>
+        <div class="legend-entry">
+            <div class="entry-food food-type-8" />
+            <h4 class="entry-text">Hides</h4>
+        </div>
     </div>
 </template>
 
@@ -51,6 +55,7 @@ export default {
 .entry-food {
     height: 15px;
     width: 15px;
+    border: 1px solid black;
 }
 
 .food-type-0 {
@@ -83,6 +88,10 @@ export default {
 
 .food-type-7 {
     background-color: black; 
+}
+
+.food-type-8 {
+    background-color: white; 
 }
 
 .entry-text {
