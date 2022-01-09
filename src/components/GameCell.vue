@@ -98,6 +98,10 @@ export default {
     -webkit-animation: blink-1 5s linear infinite both;
 }
 
+.food-type-9 {
+    background-color: brown;
+}
+
 
 .game-grid-snake-head {
     height: 10px;

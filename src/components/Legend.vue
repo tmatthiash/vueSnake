@@ -37,6 +37,10 @@
             <div class="entry-food food-type-8" />
             <h4 class="entry-text">Hides</h4>
         </div>
+        <div class="legend-entry">
+            <div class="entry-food food-type-9" />
+            <h4 class="entry-text">Earthquake</h4>
+        </div>
     </div>
 </template>
 
@@ -92,6 +96,10 @@ export default {
 
 .food-type-8 {
     background-color: white; 
+}
+
+.food-type-9 {
+    background-color: brown; 
 }
 
 .entry-text {

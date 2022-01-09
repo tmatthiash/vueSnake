@@ -65,6 +65,9 @@ export default {
 
             if(document.getElementsByClassName("ghost").length > 0) this.switchGhostModeTo(false);
             if(document.getElementsByClassName("invisible").length > 0) this.switchInvisibleModeTo(false);
+            if(document.getElementById("game-grid")) {
+                document.getElementById("game-grid").classList.remove("earthquake");
+            }
 
             switch(this.snakeFood.type) {
                 case 0:
@@ -105,6 +108,11 @@ export default {
                     this.gameScore += 3;
                     this.snakeLength += 3;
                     break;
+                case 9:
+                    this.gameScore += 3;
+                    this.snakeLength += 3;
+                    document.getElementById("game-grid").classList.add("earthquake");
+                    break;
             }
             this.resetMoveSpeed();
             this.createNewSnakeFood(); 
@@ -128,11 +136,12 @@ export default {
             previousFood?.classList.remove("food-type-6");
             previousFood?.classList.remove("food-type-7");
             previousFood?.classList.remove("food-type-8");
+            previousFood?.classList.remove("food-type-9");
         },
         createNewSnakeFood() {
 
             this.clearAllOldFoods();
-            const foodType = this.getRandomInt(9);
+            const foodType = this.getRandomInt(10);
             const newFoodX = this.getRandomInt(MAX_WIDTH-2) + 1;
             const newFoodY = this.getRandomInt(MAX_HEIGHT-2) + 1;
             this.snakeFood = { 
