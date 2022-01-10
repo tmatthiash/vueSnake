@@ -1,60 +1,60 @@
 <template>
-    <div :class="cellClass" > </div>
+  <div :class="cellClass"></div>
 </template>
 
 <script>
 export default {
-    name: "GameCell",
-    props: ["cellClass"],
-    updated() {
-        console.log("cell updating")
-    }
-}
+  name: "GameCell",
+  props: ["cellClass"],
+  updated() {
+    console.log("cell updating");
+  },
+};
 </script>
 
 <style scoped>
 .ghost {
-    opacity: 0.6;
+  opacity: 0.6;
 }
 
 .invisible {
-    opacity: 0;
+  opacity: 0;
 }
 
 .hallucination {
-    background-color: purple;
+  background-color: purple;
 }
 
 .game-grid-cell {
-    height: 10px;
-    width: 10px;
+  height: 10px;
+  width: 10px;
 }
 
 .game-grid-snake-body {
-    height: 10px;
-    width: 10px;
-    background-color: purple;
+  height: 10px;
+  width: 10px;
+  background-color: purple;
 }
 
 .is-wall {
-    background-color: #B73239;
-    border: 1px solid gray;
-    opacity: 1;
-    height: 8px;
-    width: 8px;
+  background-color: #b73239;
+  border: 1px solid gray;
+  opacity: 1;
+  height: 8px;
+  width: 8px;
 }
 
 .game-grid-snake-food {
-    opacity: 1;
-    height: 10px;
-    width: 10px;
-    border-radius: 100% 100% 70% 70%;
-    background-color: brown;
-    border: 0.5px solid black;
-    margin: -1px;
+  opacity: 1;
+  height: 10px;
+  width: 10px;
+  border-radius: 100% 100% 70% 70%;
+  background-color: brown;
+  border: 0.5px solid black;
+  margin: -1px;
 
-    -webkit-animation: jello-vertical 1.5s infinite both;
-	animation: jello-vertical 1.5s infinite both;
+  -webkit-animation: jello-vertical 1.5s infinite both;
+  animation: jello-vertical 1.5s infinite both;
 }
 
 /* .is-wall::after {
@@ -68,45 +68,45 @@ export default {
 } */
 
 .food-type-0 {
-    background-color: green; 
+  background-color: green;
 }
 
 .food-type-1 {
-    background-color: blue; 
+  background-color: blue;
 }
 
 .food-type-2 {
-    background-color: red; 
+  background-color: red;
 }
 
 .food-type-3 {
-    background-color: magenta; 
+  background-color: magenta;
 }
 
 .food-type-4 {
-    background-color: darkgrey; 
+  background-color: darkgrey;
 }
 
 .food-type-5 {
-    background-color: yellow; 
+  background-color: yellow;
 }
 
 .food-type-6 {
-    background-color: orange; 
+  background-color: orange;
 }
 
 .food-type-7 {
-    background-color: black; 
+  background-color: black;
 }
 
 .food-type-8 {
-    background-color: white; 
-    animation: blink-1 5s linear infinite both;
-    -webkit-animation: blink-1 5s linear infinite both;
+  background-color: white;
+  animation: blink-1 5s linear infinite both;
+  -webkit-animation: blink-1 5s linear infinite both;
 }
 
 .food-type-9 {
-    background: repeating-linear-gradient(
+  background: repeating-linear-gradient(
     45deg,
     white 0px,
     white 2px,
@@ -116,7 +116,7 @@ export default {
 }
 
 .food-type-10 {
-    background: repeating-radial-gradient(
+  background: repeating-radial-gradient(
     circle,
     white 0px,
     white 2px,
@@ -125,10 +125,9 @@ export default {
   );
 }
 
-
 .game-grid-snake-head {
-    background-color: rgb(45, 0, 65);
-    opacity: 1;
+  background-color: rgb(45, 0, 65);
+  opacity: 1;
 }
 
 /* ----------------------------------------------
@@ -146,70 +145,70 @@ export default {
 @-webkit-keyframes jello-vertical {
   0% {
     -webkit-transform: scale3d(1, 1, 1);
-            transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
   }
   30% {
     -webkit-transform: scale3d(0.75, 1.25, 1);
-            transform: scale3d(0.75, 1.25, 1);
+    transform: scale3d(0.75, 1.25, 1);
   }
   40% {
     -webkit-transform: scale3d(1.25, 0.75, 1);
-            transform: scale3d(1.25, 0.75, 1);
+    transform: scale3d(1.25, 0.75, 1);
   }
   50% {
     -webkit-transform: scale3d(0.85, 1.15, 1);
-            transform: scale3d(0.85, 1.15, 1);
+    transform: scale3d(0.85, 1.15, 1);
   }
   65% {
     -webkit-transform: scale3d(1.05, 0.95, 1);
-            transform: scale3d(1.05, 0.95, 1);
+    transform: scale3d(1.05, 0.95, 1);
   }
   75% {
     -webkit-transform: scale3d(0.95, 1.05, 1);
-            transform: scale3d(0.95, 1.05, 1);
+    transform: scale3d(0.95, 1.05, 1);
   }
   100% {
     -webkit-transform: scale3d(1, 1, 1);
-            transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
   }
 }
 @keyframes jello-vertical {
   0% {
     -webkit-transform: scale3d(1, 1, 1);
-            transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
   }
   30% {
     -webkit-transform: scale3d(0.75, 1.25, 1);
-            transform: scale3d(0.75, 1.25, 1);
+    transform: scale3d(0.75, 1.25, 1);
   }
   40% {
     -webkit-transform: scale3d(1.25, 0.75, 1);
-            transform: scale3d(1.25, 0.75, 1);
+    transform: scale3d(1.25, 0.75, 1);
   }
   50% {
     -webkit-transform: scale3d(0.85, 1.15, 1);
-            transform: scale3d(0.85, 1.15, 1);
+    transform: scale3d(0.85, 1.15, 1);
   }
   65% {
     -webkit-transform: scale3d(1.05, 0.95, 1);
-            transform: scale3d(1.05, 0.95, 1);
+    transform: scale3d(1.05, 0.95, 1);
   }
   75% {
     -webkit-transform: scale3d(0.95, 1.05, 1);
-            transform: scale3d(0.95, 1.05, 1);
+    transform: scale3d(0.95, 1.05, 1);
   }
   100% {
     -webkit-transform: scale3d(1, 1, 1);
-            transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
   }
 }
 
 @-webkit-keyframes blink-1 {
   0% {
-      opacity: 0;
+    opacity: 0;
   }
   60% {
-      opacity: 0;
+    opacity: 0;
   }
   100% {
     opacity: 1;
@@ -217,14 +216,13 @@ export default {
 }
 @keyframes blink-1 {
   0% {
-      opacity: 0;
+    opacity: 0;
   }
   60% {
-      opacity: 0;
+    opacity: 0;
   }
   100% {
     opacity: 1;
   }
 }
-
 </style>

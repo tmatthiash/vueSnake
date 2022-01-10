@@ -1,4 +1,3 @@
-
 export const randomInt = (numberCount) => {
-    return Math.floor(Math.random() * numberCount)
-}
+  return Math.floor(Math.random() * numberCount);
+};

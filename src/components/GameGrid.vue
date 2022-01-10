@@ -1,52 +1,54 @@
-<template >
-    <div class="game-grid" id="game-grid" v-if="gameMap !== null">
-        <div class="game-grid-column" :key="x" v-for="(x, indexX) in gameMap">
-             <!-- <div 
+<template>
+  <div class="game-grid" id="game-grid" v-if="gameMap !== null">
+    <div class="game-grid-column" :key="x" v-for="(x, indexX) in gameMap">
+      <!-- <div 
                 class="game-grid-cell" 
                 :class="{ 'is-wall': gameMap[indexX][indexY] === 'W',
                     'game-grid-snake-body' : locationIsSnakeBody(indexX, indexY) }" 
                 :key="y" 
                 v-for="(y, indexY) in x"> -->
-                <game-row 
-                    :gameMap="gameMap" 
-                    :snakeFood="snakeFood"
-                    :snakeBody="snakeBody" 
-                    :indexX="indexX" 
-                    :xLocation="xLocation" 
-                    :yLocation="yLocation" :x="x" />
-                 <!-- <div class="game-grid-snake-head" v-if="indexX === xLocation && indexY === yLocation" />
+      <game-row
+        :gameMap="gameMap"
+        :snakeFood="snakeFood"
+        :snakeBody="snakeBody"
+        :indexX="indexX"
+        :xLocation="xLocation"
+        :yLocation="yLocation"
+        :x="x"
+      />
+      <!-- <div class="game-grid-snake-head" v-if="indexX === xLocation && indexY === yLocation" />
                  <div 
                     class="game-grid-snake-food" 
                     :class="'food-type-' + snakeFood.type"
                     v-if="indexX === snakeFood.x && indexY === snakeFood.y" />
              </div> -->
-        </div>
     </div>
+  </div>
 </template>
 
 <script>
-import GameRow from "./GameRow.vue"
+import GameRow from "./GameRow.vue";
 
 export default {
-    name: 'GameGrid',
-    components: { GameRow },
-    props: ["gameMap", "xLocation", "yLocation", "snakeBody", "snakeFood"],
-}
+  name: "GameGrid",
+  components: { GameRow },
+  props: ["gameMap", "xLocation", "yLocation", "snakeBody", "snakeFood"],
+};
 </script>
 
 <style scoped>
-
 .earthquake {
-	-webkit-animation: shake-lr 8s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
-    animation: shake-lr 8s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
+  -webkit-animation: shake-lr 8s cubic-bezier(0.455, 0.03, 0.515, 0.955)
+    infinite both;
+  animation: shake-lr 8s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite both;
 }
 .game-grid {
-    display: flex;
+  display: flex;
 }
 
 .game-grid-column {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 /* ----------------------------------------------
@@ -65,67 +67,66 @@ export default {
   0%,
   100% {
     -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
+    transform: rotate(0deg);
     -webkit-transform-origin: 50% 50%;
-            transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
   }
   10% {
     -webkit-transform: rotate(8deg);
-            transform: rotate(8deg);
+    transform: rotate(8deg);
   }
   20%,
   40%,
   60% {
     -webkit-transform: rotate(-10deg);
-            transform: rotate(-10deg);
+    transform: rotate(-10deg);
   }
   30%,
   50%,
   70% {
     -webkit-transform: rotate(10deg);
-            transform: rotate(10deg);
+    transform: rotate(10deg);
   }
   80% {
     -webkit-transform: rotate(-8deg);
-            transform: rotate(-8deg);
+    transform: rotate(-8deg);
   }
   90% {
     -webkit-transform: rotate(8deg);
-            transform: rotate(8deg);
+    transform: rotate(8deg);
   }
 }
 @keyframes shake-lr {
   0%,
   100% {
     -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
+    transform: rotate(0deg);
     -webkit-transform-origin: 50% 50%;
-            transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
   }
   10% {
     -webkit-transform: rotate(8deg);
-            transform: rotate(8deg);
+    transform: rotate(8deg);
   }
   20%,
   40%,
   60% {
     -webkit-transform: rotate(-10deg);
-            transform: rotate(-10deg);
+    transform: rotate(-10deg);
   }
   30%,
   50%,
   70% {
     -webkit-transform: rotate(10deg);
-            transform: rotate(10deg);
+    transform: rotate(10deg);
   }
   80% {
     -webkit-transform: rotate(-8deg);
-            transform: rotate(-8deg);
+    transform: rotate(-8deg);
   }
   90% {
     -webkit-transform: rotate(8deg);
-            transform: rotate(8deg);
+    transform: rotate(8deg);
   }
 }
-
 </style>

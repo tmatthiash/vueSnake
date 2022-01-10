@@ -1,24 +1,30 @@
 <template>
-  <img alt="Vue logo" src="./assets/snake.png">
+  <img alt="Vue logo" src="./assets/snake.png" />
   <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-  <home-page :key="componentKey" v-on:reset="handleSpaceBar()" v-on:collide="restartAvailable = true" />
-   <button v-if="restartAvailable" class="reset-button" @click="forceRender()">RESET (Space Bar)</button>
+  <home-page
+    :key="componentKey"
+    v-on:reset="handleSpaceBar()"
+    v-on:collide="restartAvailable = true"
+  />
+  <button v-if="restartAvailable" class="reset-button" @click="forceRender()">
+    RESET (Space Bar)
+  </button>
 </template>
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
-import HomePage from './components/HomePage.vue'
-import { clearAllClasses } from "./utils/ClearAllClasses"
+import HomePage from "./components/HomePage.vue";
+import { clearAllClasses } from "./utils/ClearAllClasses";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HomePage
+    HomePage,
   },
   data() {
     return {
       componentKey: 0,
-      restartAvailable: false
+      restartAvailable: false,
     };
   },
   methods: {
@@ -28,10 +34,10 @@ export default {
       clearAllClasses();
     },
     handleSpaceBar() {
-      if(this.restartAvailable) this.forceRender();
-    }
-  }
-}
+      if (this.restartAvailable) this.forceRender();
+    },
+  },
+};
 </script>
 
 <style>
@@ -43,15 +49,14 @@ export default {
   color: #2c3e50;
 }
 
-
 .reset-button {
-    margin-top: 20px;
-    background-color: white;
-    border: 2px solid purple;
-    height: 30px;
-    width: 175px;
-    font-weight: bold;
-    color: purple;
-    border-radius: 8px;
+  margin-top: 20px;
+  background-color: white;
+  border: 2px solid purple;
+  height: 30px;
+  width: 175px;
+  font-weight: bold;
+  color: purple;
+  border-radius: 8px;
 }
 </style>
