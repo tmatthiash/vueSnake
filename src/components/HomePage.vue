@@ -19,6 +19,7 @@ import { map, MAX_HEIGHT, MAX_WIDTH } from '../map'
 import Legend from './Legend.vue';
 import { getFoodCoords } from "../utils/GetFoodCoords";
 import { randomInt } from '../utils/RandomInt';
+import { clearHallucinations, generateHallucinations } from '../utils/Hallucinations';
 
 export default {
     name: 'HomePage',
@@ -67,6 +68,7 @@ export default {
 
             if(document.getElementsByClassName("ghost").length > 0) this.switchGhostModeTo(false);
             if(document.getElementsByClassName("invisible").length > 0) this.switchInvisibleModeTo(false);
+            if(document.getElementsByClassName("hallucination").length > 0) clearHallucinations();
             if(document.getElementById("game-grid")) {
                 document.getElementById("game-grid").classList.remove("earthquake");
             }
@@ -115,6 +117,11 @@ export default {
                     this.snakeLength += 3;
                     document.getElementById("game-grid").classList.add("earthquake");
                     break;
+                case 10:
+                    this.gameScore += 3;
+                    this.snakeLength += 3;
+                    generateHallucinations();
+                    break;
             }
             this.resetMoveSpeed();
             this.createNewSnakeFood(); 
@@ -136,12 +143,13 @@ export default {
             previousFood?.classList.remove("food-type-7");
             previousFood?.classList.remove("food-type-8");
             previousFood?.classList.remove("food-type-9");
+            previousFood?.classList.remove("food-type-10");
         },
         createNewSnakeFood() {
 
             this.clearAllOldFoods();
-            const foodType = randomInt(10);
-            // const foodType = 4;
+            const foodType = randomInt(11);
+            // const foodType = 10;
             const foodCoords = getFoodCoords(this.snakeBody);
             const newFoodX = foodCoords.x;
             const newFoodY = foodCoords.y;

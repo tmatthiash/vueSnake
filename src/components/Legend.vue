@@ -41,6 +41,10 @@
             <div class="entry-food food-type-9" />
             <h4 class="entry-text">Earthquake</h4>
         </div>
+        <div class="legend-entry">
+            <div class="entry-food food-type-10" />
+            <h4 class="entry-text">Hallucinations</h4>
+        </div>
     </div>
 </template>
 
@@ -113,6 +117,16 @@ export default {
     white 2px,
     brown 2px,
     brown 4px
+  );
+}
+
+.food-type-10 {
+    background: repeating-radial-gradient(
+    circle,
+    white 0px,
+    white 2px,
+    purple 2px,
+    purple 4px
   );
 }
 

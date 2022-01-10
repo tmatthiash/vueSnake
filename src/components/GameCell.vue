@@ -21,6 +21,10 @@ export default {
     opacity: 0;
 }
 
+.hallucination {
+    background-color: purple;
+}
+
 .game-grid-cell {
     height: 10px;
     width: 10px;
@@ -108,6 +112,16 @@ export default {
     white 2px,
     brown 2px,
     brown 4px
+  );
+}
+
+.food-type-10 {
+    background: repeating-radial-gradient(
+    circle,
+    white 0px,
+    white 2px,
+    purple 2px,
+    purple 4px
   );
 }
 
