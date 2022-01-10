@@ -1,6 +1,6 @@
 <template>
     <div class="legend">
-        <h2>Egg Type Legend</h2>
+        <h2 class="legend-main-label">Egg Type Legend</h2>
         <div class="legend-entry">
             <div class="entry-food food-type-0" />
             <h4 class="entry-text">Normal</h4>
@@ -51,6 +51,14 @@ export default {
 </script>
 
 <style scoped>
+.legend {
+    margin-left: 30px;
+}
+
+.legend-main-label {
+    margin-top: 0;
+}
+
 .legend-entry {
     display: flex;
     margin: 5px 0;

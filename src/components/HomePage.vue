@@ -140,8 +140,8 @@ export default {
         createNewSnakeFood() {
 
             this.clearAllOldFoods();
-            // const foodType = randomInt(10);
-            const foodType = 4;
+            const foodType = randomInt(10);
+            // const foodType = 4;
             const foodCoords = getFoodCoords(this.snakeBody);
             const newFoodX = foodCoords.x;
             const newFoodY = foodCoords.y;
@@ -304,7 +304,7 @@ export default {
 <style scoped>
 .game-wrapper {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
 }
 
 .score-label {
