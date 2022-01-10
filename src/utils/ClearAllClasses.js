@@ -5,6 +5,7 @@ export const clearAllClasses = () => {
         allHallucinationCells[j].classList.remove("ghost");
         allHallucinationCells[j].classList.remove("invisible");
         allHallucinationCells[j].classList.remove("game-grid-snake-body");
+        allHallucinationCells[j].classList.remove("game-grid-snake-head");
     }
 
     document.getElementById("game-grid").classList.remove("earthquake");

@@ -4,7 +4,7 @@ export const generateHallucinations = () => {
     console.log("generate")
     const allCells = document.getElementsByClassName("game-grid-cell")
     for(let i = 0; i < allCells.length; i++) {
-        if(randomInt(10) ===0){
+        if(randomInt(8) === 0){
             allCells[i].classList.add("hallucination");
         }
     }

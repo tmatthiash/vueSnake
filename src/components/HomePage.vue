@@ -11,7 +11,7 @@
             />
         <Legend />
     </div>
-    <button v-if="this.intervalId === null" @click="resetGame()">RESET (Space Bar)</button>
+    <!-- <button class="reset-button" v-if="this.intervalId === null" @click="resetGame()">RESET (Space Bar)</button> -->
 </template>
 
 <script>
@@ -22,7 +22,6 @@ import { getFoodCoords } from "../utils/GetFoodCoords";
 import { randomInt } from '../utils/RandomInt';
 import { clearHallucinations, generateHallucinations } from '../utils/Hallucinations';
 import { startingState } from "../data/StartingState"
-import { clearAllClasses } from "../utils/ClearAllClasses"
 
 export default {
     name: 'HomePage',
@@ -30,17 +29,18 @@ export default {
         GameGrid,
         Legend
     },
+    emits: ["collide", "reset"],
     data() {
         return {      
             gameMap: null,
             xLocation: startingState.xLocation,
             yLocation: startingState.yLocation,
-            snakeBody: startingState.snakeBody,
+            snakeBody: [],
             keyPress: startingState.keyPress,
             lastKeyPress: startingState.lastKeyPress,
             snakeLength: startingState.snakeLength,
             gameScore: startingState.gameScore,
-            snakeFood: startingState.snakeFood,
+            snakeFood: {},
             gameSpeed: startingState.gameSpeed,
             intervalId: startingState.intervalId,
             isFoodTeleporting: startingState.isFoodTeleporting
@@ -239,7 +239,8 @@ export default {
         
             if(this.keyPress) {
                 if(this.hasColided()) {
-                    console.log("COLLISION")
+                    console.log("COLLISION");
+                    this.$emit('collide');
                     this.switchInvisibleModeTo(false);
                     clearInterval(this.intervalId);
                     this.intervalId = null;
@@ -265,29 +266,6 @@ export default {
             newFood.classList.add("game-grid-snake-food");
             newFood.classList.add('food-type-3');
             }
-        },
-        resetGame() {
-            clearInterval(this.intervalId);
-
-
-            setTimeout(() => {
-                clearAllClasses()
-                this.xLocation = startingState.xLocation;
-                this.yLocation = startingState.yLocation;
-                this.snakeBody = startingState.snakeBody;
-                this.keyPress = startingState.keyPress;
-                this.lastKeyPress = startingState.lastKeyPress;
-                this.snakeLength = startingState.snakeLength;
-                this.gameScore = startingState.gameScore;
-                this.snakeFood = startingState.snakeFood;
-                this.gameSpeed = startingState.gameSpeed;
-                this.intervalId = startingState.intervalId;
-                this.isFoodTeleporting = startingState.isFoodTeleporting;
-
-                this.setMovingInterval();
-                this.createNewSnakeFood();
-            }, 100)
-
         },
         switchGhostModeTo(on) {
             if(on) {
@@ -326,8 +304,8 @@ export default {
         this.setMovingInterval();
 
         window.addEventListener("keypress", e => {
-            if(e.key === ' ' && this.intervalId === null) {
-                this.resetGame();
+            if(e.key === ' ') {
+                this.$emit("reset");
             }
             const allowedKeys = ['w', 'a', 's', 'd'];
             if(allowedKeys.includes(e.key)) {
