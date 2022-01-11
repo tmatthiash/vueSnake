@@ -1,5 +1,7 @@
 <template>
-  <div class="score-label">Score: {{ gameScore }}</div>
+  <div class="score-label">
+    Score: {{ gameScore }}. Highscore: {{ retrieveHighScore() }}
+  </div>
   <h4 class="explanation-label">
     (Most eggs increase your score and body length by 3)
   </h4>
@@ -27,6 +29,7 @@ import {
   generateHallucinations,
 } from "../utils/Hallucinations";
 import { startingState } from "../data/StartingState";
+import { getHighScore, newScore } from "../utils/LocalStorage";
 
 export default {
   name: "HomePage",
@@ -52,6 +55,9 @@ export default {
     };
   },
   methods: {
+    retrieveHighScore() {
+      return getHighScore();
+    },
     hasColided() {
       if (this.yLocation === 0) return true;
       if (this.xLocation === 0) return true;
@@ -259,6 +265,7 @@ export default {
 
         if (this.keyPress) {
           if (this.hasColided()) {
+            newScore(this.gameScore);
             console.log("COLLISION");
             this.$emit("collide");
             this.switchInvisibleModeTo(false);
